@@ -200,6 +200,7 @@ namespace MyStore
             do
             {
                 // Display current date and role selection menu
+                Console.WriteLine("--------------------------------");
                 DisplayCurrentDate();
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine("Select your role:");
@@ -439,33 +440,43 @@ namespace MyStore
 
             if (productIndex != -1)
             {
-                Console.WriteLine("Enter the new product name (Enter to keep existing):");
+
+                Console.WriteLine("Enter the new product name:");
                 string newName = ReadString();
                 if (!string.IsNullOrEmpty(newName))
                 {
                     // Update the product name if a new name is provided
                     products[productIndex].Name = newName;
                 }
+                else
+                {
+                    Console.WriteLine("Enter a valid product name.");
+                }
 
                 Console.WriteLine("Enter the new unit price (Enter to keep existing):");
-                double.TryParse(Console.ReadLine(), out double newUnitPrice);
-                if (newUnitPrice > 0)
+                double newUnitPrice = ReadDouble();
+                if (newUnitPrice >= 0)
                 {
                     // Update the unit price if a valid new value is provided
                     products[productIndex].UnitPrice = newUnitPrice;
                 }
+                else
+                {
+                    Console.WriteLine("Enter a valid non-negative unit price.");
+                }
 
                 Console.WriteLine("Enter the new quantity available (Enter to keep existing):");
-                int.TryParse(Console.ReadLine(), out int newQuantity);
-                if (newQuantity >= 0)
+                if (int.TryParse(Console.ReadLine(), out int newQuantity) && newQuantity >= 0)
                 {
                     // Update the quantity available if a valid new value is provided
                     products[productIndex].QuantityAvailable = newQuantity;
                 }
-
+                else
+                {
+                    Console.WriteLine("Please enter a valid non-negative number.");
+                }
                 Console.WriteLine("Product information modified successfully.");
                 Console.WriteLine("--------------------------------");
-
                 // Display modified product information
                 Console.WriteLine("Modified Product Details:");
                 Console.WriteLine($"ID: {products[productIndex].Id}");
@@ -489,7 +500,7 @@ namespace MyStore
                 if (product.Name != null)
                 {
                     // Display product information
-                    Console.WriteLine("*****************************************");
+                    Console.WriteLine("---------------------------------------------------------------------------------|");
 
                     Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Unit Price: {product.UnitPrice}, Quantity Available: {product.QuantityAvailable}");
                 }
@@ -672,12 +683,16 @@ namespace MyStore
         /// </summary>
         static void DisplayAllSales()
         {
+            Console.WriteLine("*********************");
+
             Console.WriteLine("Sales History:");
 
             // Check if there are any sales
             if (sales.Length == 0)
             {
+                Console.WriteLine("----------------------------");
                 Console.WriteLine("No sales found.");
+                Console.WriteLine("----------------------------");
             }
             else
             {
@@ -706,14 +721,17 @@ namespace MyStore
                             }
                         }
 
-                        Console.WriteLine("------------");
+                        Console.WriteLine("----------------------------");
                     }
                 }
 
                 // Check if no valid sales were found
                 if (!salesFound)
                 {
+                    Console.WriteLine("----------------------------");
                     Console.WriteLine("No sales found.");
+                    Console.WriteLine("----------------------------");
+
                 }
             }
         }
