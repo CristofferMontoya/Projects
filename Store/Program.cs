@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyStore
+namespace MyStore_Montoya
 {
     class Program
     {
@@ -574,7 +574,10 @@ namespace MyStore
                 if (client.FirstName != null)
                 {
                     // Display client information
+                    Console.WriteLine("--------------------------------");
                     Console.WriteLine($"ID: {client.Id}, Name: {client.FirstName} {client.LastName}");
+                    Console.WriteLine("--------------------------------");
+
                 }
             }
         }
@@ -676,7 +679,10 @@ namespace MyStore
             }
 
             // Display total sales
+            Console.WriteLine("--------------------------------");
             Console.WriteLine($"Total Sales: {totalSales}");
+            Console.WriteLine("--------------------------------");
+
         }
         /// <summary>
         /// Displays detailed information about all sales.
